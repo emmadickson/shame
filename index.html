@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shame Language</title>
+<style>
+
+svg {
+  display:block; 
+  margin-left: auto;
+  margin-right: auto;
+  background:#fff;
+  padding-top: 20px;
+}
+
+</style>
+
+</head>
+<body>
+
+    <svg id="shame_canvas" width="300" height="300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    </svg>
+<br>
+    <div style="text-align:center"><input type="text" placeholder="" id="myInput">
+      <br><br>
+    <button type="button" onclick="getInputValue();">Share</button>
+    <button type="button" onclick="absolve();">Absolve</button>
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    var svgns = "http://www.w3.org/2000/svg";
+  
+    function getInputValue(){
+        // Selecting the input element and get its value 
+        var elem = document.querySelector('#shame_canvas');
+        elem.parentNode.removeChild(elem);
+        svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+        svg.id="shame_canvas"
+        svg.setAttribute("width", 300)
+        svg.setAttribute("height", 300)
+
+        body = document.getElementsByTagName('body')[0]
+        console.log(body)
+        body.prepend(svg)
+        console.log(document.getElementById("shame_canvas"))
+        var inputVal = document.getElementById("myInput").value;
+        
+        shame_colors = [  'rgb(0,0,0)',
+           'rgb(0,26,142)',
+           'rgb(0,54,247)',
+           'rgb(154,25,18)',
+           'rgb(152,39,143)',
+           'rgb(149,61,248)',
+           'rgb(255,51,40)',
+           'rgb(255,59,147)',
+           'rgb(254,75,249)',
+           'rgb(0,142,32)',
+           'rgb(0,144,145)',
+           'rgb(0,150,249)',
+           'rgb(148,144,39)',
+           'rgb(147,147,147)',
+           'rgb(143, 152,250)',
+           'rgb(255,150,53)',
+           'rgb(155,152,150)',
+           'rgb(252,156,249)',
+           'rgb(0,247,63)',
+           'rgb(0,248,153)',
+           'rgb(0,251,253)',
+           'rgb(133,248,67)',
+           'rgb(131,250,155)',
+           'rgb(127,253,254)',
+           'rgb(255,251,75)',
+           'rgb(255,252,158)'
+         ]
+
+        var shame_language = {
+          'a': '',
+          'b': '',
+          'c': '',
+          'd': '',
+          'e': '',
+          'f': '',
+          'g': '',
+          'h': '',
+          'i': '',
+          'j': '',
+          'k': '',
+          'l': '',
+          'm': '',
+          'n': '',
+          'o': '',
+          'p': '',
+          'q': '',
+          'r': '',
+          's': '',
+          't': '',
+          'u': '',
+          'v': '',
+          'w': '',
+          'x': '',
+          'y': '',
+          'z': ''
+        };
+        
+        for (shame in shame_language){
+          randomElement = shame_colors[Math.floor(Math.random() * shame_colors.length)];
+          shame_language[shame] = randomElement;
+          for( var i = 0; i < shame_colors.length; i++){ if ( shame_colors[i] === randomElement) { shame_colors.splice(i, 1); }}
+        }
+        // Displaying the value
+        shame = inputVal.split("")
+        x = 0;
+        y = 0;
+        for (i = 0; i < inputVal.length; i++) {
+          (function(ind) {
+               setTimeout(function(){
+                 var rect = document.createElementNS(svgns, 'rect');
+                   shame = document.getElementById("myInput").value 
+                   shame_letter = shame.charAt(0)
+                   shame = shame.substr(1)
+                   console.log(shame_letter)
+                   document.getElementById("myInput").value = shame
+                   x = x + 10;
+                   if (x == 300){
+                     x = 0;
+                     y = y + 10;
+                   }
+                   
+                   rect.setAttributeNS(null, 'x', x);
+                   rect.setAttributeNS(null, 'y', y);
+                   rect.setAttributeNS(null, 'height', '10');
+                   rect.setAttributeNS(null, 'width', '10');
+                   
+
+                   if (shame_letter == undefined || shame_language[shame_letter.toLowerCase()] == undefined){
+                     color_of_shame = 'rgb(255,255,255)'
+                   }
+                   else{
+                     letter_of_shame = shame_letter.toLowerCase()
+                     color_of_shame = shame_language[shame_letter.toLowerCase()]  
+                   }
+                   rect.setAttributeNS(null, 'fill', color_of_shame);
+                   console.log(color_of_shame)
+                   document.getElementById('shame_canvas').appendChild(rect);
+                   
+                 
+               }, 1000 + (100 * ind));
+           })(i);
+        
+        } 
+  
+    }
+    function absolve(){
+      x = 300;
+      y = 300;
+      for (i = 0; i < 1000; i++) {
+      (function(ind) {
+           setTimeout(function(){
+               var rect = document.createElementNS(svgns, 'rect');
+               if (x % 300 == 0){
+                 y = y - 10;
+                 x = 300
+               }
+               
+               rect.setAttributeNS(null, 'x', x);
+               rect.setAttributeNS(null, 'y', y);
+               rect.setAttributeNS(null, 'height', '10');
+               rect.setAttributeNS(null, 'width', '10');
+               rect.setAttributeNS(null, 'fill', 'rgb(0,0,0)');
+               document.getElementById('shame_canvas').appendChild(rect);
+               x = x - 10;
+
+
+           }, 1000 + (50 * ind));
+       })(i);
+    
+    } 
+  }
+    </script>
+</body>
+</html>
