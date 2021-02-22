@@ -5,179 +5,175 @@
 <title>Shame Language</title>
 <style>
 
-svg {
-  display:block; 
-  margin-left: auto;
-  margin-right: auto;
-  background:#fff;
-  padding-top: 20px;
+#interior_life {
+
+  width:300px;
+  height:300px;
+  overflow-wrap: break-word;
+  overflow-x: scroll;
 }
 
 </style>
-
+<link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+ <link href="assets/css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+ <link href="assets/css/font.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-
-    <svg id="shame_canvas" width="300" height="300" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    </svg>
-<br>
-    <div style="text-align:center"><input type="text" placeholder="" id="myInput">
-      <br><br>
-    <button type="button" onclick="getInputValue();">Share</button>
-    <button type="button" onclick="absolve();">Absolve</button>
-
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script>
-    var svgns = "http://www.w3.org/2000/svg";
-  
-    function getInputValue(){
-        // Selecting the input element and get its value 
-        var elem = document.querySelector('#shame_canvas');
-        elem.parentNode.removeChild(elem);
-        svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
-        svg.id="shame_canvas"
-        svg.setAttribute("width", 300)
-        svg.setAttribute("height", 300)
-
-        body = document.getElementsByTagName('body')[0]
-        console.log(body)
-        body.prepend(svg)
-        console.log(document.getElementById("shame_canvas"))
-        var inputVal = document.getElementById("myInput").value;
-        
-        shame_colors = [  'rgb(0,0,0)',
-           'rgb(0,26,142)',
-           'rgb(0,54,247)',
-           'rgb(154,25,18)',
-           'rgb(152,39,143)',
-           'rgb(149,61,248)',
-           'rgb(255,51,40)',
-           'rgb(255,59,147)',
-           'rgb(254,75,249)',
-           'rgb(0,142,32)',
-           'rgb(0,144,145)',
-           'rgb(0,150,249)',
-           'rgb(148,144,39)',
-           'rgb(147,147,147)',
-           'rgb(143, 152,250)',
-           'rgb(255,150,53)',
-           'rgb(155,152,150)',
-           'rgb(252,156,249)',
-           'rgb(0,247,63)',
-           'rgb(0,248,153)',
-           'rgb(0,251,253)',
-           'rgb(133,248,67)',
-           'rgb(131,250,155)',
-           'rgb(127,253,254)',
-           'rgb(255,251,75)',
-           'rgb(255,252,158)'
-         ]
-
-        var shame_language = {
-          'a': '',
-          'b': '',
-          'c': '',
-          'd': '',
-          'e': '',
-          'f': '',
-          'g': '',
-          'h': '',
-          'i': '',
-          'j': '',
-          'k': '',
-          'l': '',
-          'm': '',
-          'n': '',
-          'o': '',
-          'p': '',
-          'q': '',
-          'r': '',
-          's': '',
-          't': '',
-          'u': '',
-          'v': '',
-          'w': '',
-          'x': '',
-          'y': '',
-          'z': ''
-        };
-        
-        for (shame in shame_language){
-          randomElement = shame_colors[Math.floor(Math.random() * shame_colors.length)];
-          shame_language[shame] = randomElement;
-          for( var i = 0; i < shame_colors.length; i++){ if ( shame_colors[i] === randomElement) { shame_colors.splice(i, 1); }}
-        }
-        // Displaying the value
-        shame = inputVal.split("")
-        x = 0;
-        y = 0;
-        for (i = 0; i < inputVal.length; i++) {
-          (function(ind) {
-               setTimeout(function(){
-                 var rect = document.createElementNS(svgns, 'rect');
-                   shame = document.getElementById("myInput").value 
-                   shame_letter = shame.charAt(0)
-                   shame = shame.substr(1)
-                   console.log(shame_letter)
-                   document.getElementById("myInput").value = shame
-                   x = x + 10;
-                   if (x == 300){
-                     x = 0;
-                     y = y + 10;
-                   }
-                   
-                   rect.setAttributeNS(null, 'x', x);
-                   rect.setAttributeNS(null, 'y', y);
-                   rect.setAttributeNS(null, 'height', '10');
-                   rect.setAttributeNS(null, 'width', '10');
-                   
-
-                   if (shame_letter == undefined || shame_language[shame_letter.toLowerCase()] == undefined){
-                     color_of_shame = 'rgb(255,255,255)'
-                   }
-                   else{
-                     letter_of_shame = shame_letter.toLowerCase()
-                     color_of_shame = shame_language[shame_letter.toLowerCase()]  
-                   }
-                   rect.setAttributeNS(null, 'fill', color_of_shame);
-                   console.log(color_of_shame)
-                   document.getElementById('shame_canvas').appendChild(rect);
-                   
-                 
-               }, 1000 + (100 * ind));
-           })(i);
-        
-        } 
-  
-    }
-    function absolve(){
-      x = 300;
-      y = 300;
-      for (i = 0; i < 1000; i++) {
-      (function(ind) {
-           setTimeout(function(){
-               var rect = document.createElementNS(svgns, 'rect');
-               if (x % 300 == 0){
-                 y = y - 10;
-                 x = 300
-               }
-               
-               rect.setAttributeNS(null, 'x', x);
-               rect.setAttributeNS(null, 'y', y);
-               rect.setAttributeNS(null, 'height', '10');
-               rect.setAttributeNS(null, 'width', '10');
-               rect.setAttributeNS(null, 'fill', 'rgb(0,0,0)');
-               document.getElementById('shame_canvas').appendChild(rect);
-               x = x - 10;
-
-
-           }, 1000 + (50 * ind));
-       })(i);
+  <div class="container">
+       <div class="row" style="padding: 40px">
+         <div class="col s6 m6">
+           <img id="swimmer" width="300" height="300" src="images/test0.jpg">
+         </div>
+         <div class="col s6 m6">
+           <canvas id='interior_life' width="300" height="300" ></canvas>
+         </div>
+       </div>
     
-    } 
-  }
-    </script>
+     <div class="row" >
+       <div class="col s4 m4"></div>
+
+       <div class="col s4 m4">
+         <input type="text" id="myInput" style="font-family: 'Chicago'; width:200px; height:50px; border-color: black;">
+       </div>
+       <div class="col s4 m4"></div>
+     </div>
+     <br><br>
+     <div class="row">
+       <div class="col s8 m">
+           <button  type="button" class="btn black darken-4; share" onclick="submerge()" style="font-family: 'Chicago';">Wash</button>
+       </div>
+       <div class="col s4 m4">
+         <button  type="button" class="btn black darken-4; share" onclick="emerge()" style="font-family: 'Chicago';">Rinse</button>
+       </div>
+     </div>
+   </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  var isPaused = false;
+  var count = 0;
+
+  shame_colors = [  
+     'rgb(179,48,34)',
+     'rgb(229,207,60)',
+     'rgb(188,217,190)',
+     'rgb(159,176,199)',
+     'rgb(69,94,149)',
+     'rgb(81,114,91)',
+     'rgb(134,205,106)',
+     'rgb(204,85,155)',
+     'rgb(0,0,0)',
+     'rgb(255,0,255)',
+     'rgb(0,255,255)',
+     'rgb(255,255,0)',
+     'rgb(164,255,68)',
+     'rgb(255,255,255)',
+   ]
+
+  
+  
+  var t = window.setInterval(function() {
+    if(isPaused != true) {
+
+      x = -10;
+      y = 0;
+      var imageObj = document.getElementById('swimmer')
+      var canvas = document.getElementById('interior_life');
+      var context = canvas.getContext('2d');
+    
+      if (count == 0){
+        imageObj.src = 'images/test0.jpg';
+      }
+      if (count == 1){
+        imageObj.src = 'images/test1.jpg';
+      }
+      if (count == 2){
+        imageObj.src = 'images/test2.jpg';
+      }
+      if (count == 3){
+        imageObj.src = 'images/test3.jpg';
+      }
+      count = count + 1;
+      if (count > 3){
+        count = 0;
+      }
+    }
+  }, 200);
+      
+function submerge(){
+
+        
+    // Selecting the input element and get its value 
+    var inputVal = document.getElementById("myInput").value;
+
+    if (inputVal.length > 0 && isPaused == false){
+      isPaused = true;
+      var canvas = document.getElementById('interior_life');
+
+      document.getElementById("myInput").value = ''
+      var ctx = canvas.getContext("2d");
+    
+      var shame = inputVal.split("")
+      if (shame.length > 300){
+        shame = shame.slice(0, 300)
+      }
+      for (i = 0; i < shame.length; i++) {
+        (function(ind) {
+             setTimeout(function(){
+                 shame_letter = shame[ind]
+                 
+                 x = x + 10;
+                 if (x == 300){
+                   x = 0;
+                   y = y + 10;
+                 }
+                 const randomElement = shame_colors[Math.floor(Math.random() * shame_colors.length)];
+
+                 color_of_shame = randomElement  
+                 
+                 ctx.fillStyle = color_of_shame;
+                 ctx.fillRect(x, y, 10, 10);
+                
+             }, 1000 + (100 * ind));
+         })(i);
+    }
+    }  
+}
+
+function emerge(){
+   randomblue = (Math.floor(Math.random() * 255))
+  if (isPaused){
+    var canvas = document.getElementById('interior_life');
+    const randomElement = shame_colors[Math.floor(Math.random() * shame_colors.length)];
+
+     x = 300;
+     y = 300;
+     var ctx = canvas.getContext("2d");
+     overall_count = 0
+     for (i = 0; i <= 31; i++) {
+     (function(ind) {
+          setTimeout(function(){
+            
+          
+
+              ctx.fillStyle = randomElement;
+              ctx.fillRect(x, y, -300, 100);
+              overall_count += 1
+              y = y - 10;
+              x = 300
+              if (overall_count == 31){
+                isPaused = false;
+
+              }
+
+          }, 1000 + (50 * ind));
+      })(i);
+   
+   } 
+ }
+ }  
+  
+  </script>
 </body>
 </html>
